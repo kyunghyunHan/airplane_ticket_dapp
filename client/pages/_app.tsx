@@ -7,8 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const { Header, Footer, Sider, Content } = Layout;
   const headerStyle: React.CSSProperties = {
     width: "100%",
-    textAlign: "center",
-    color: "#fff",
+    color: "black",
     height: 64,
     backgroundColor: "white",
     top: 0,

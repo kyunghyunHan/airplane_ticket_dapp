@@ -38,15 +38,15 @@ const items: MenuProps["items"] = [
   },
 ];
 const Navbar: React.FC = () => (
-  <Row align="middle">
+  <Row align={"stretch"}>
     <Col
       style={{ textAlign: "left" }}
-      xl={{ span: 2, offset: 4 }}
-      lg={{ span: 2, offset: 4 }}
+      xl={{ span: 4, offset: 2 }}
+      lg={{ span: 4, offset: 2 }}
       sm={{ span: 4, offset: 10 }}
       xs={{ span: 4, offset: 10 }}
     >
-      <a href="">비행기</a>
+      <h1 style={{ bottom: 2 }}>AirLine</h1>
     </Col>
     <Col
       xl={{ span: 8, offset: 6 }}
