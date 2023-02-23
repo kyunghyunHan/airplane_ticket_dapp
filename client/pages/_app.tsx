@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { Layout, Space } from "antd";
+import { Layout, Space, Affix } from "antd";
 import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";
 import Navbar from "components/Layout/navbar";
 import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
@@ -10,14 +10,11 @@ export default function App({ Component, pageProps }: AppProps) {
     textAlign: "center",
     color: "#fff",
     height: 64,
-    lineHeight: "62px",
     backgroundColor: "white",
     top: 0,
-    position: "fixed",
   };
   const wallets = [new MartianWallet()];
   const contentStyle: React.CSSProperties = {
-    marginTop: "64px",
     textAlign: "center",
     height: "100%",
     minHeight: 1000,
@@ -36,7 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <Space direction="vertical" style={{ width: "100%" }}>
           <Layout>
             <Header style={headerStyle}>
-              <Navbar />
+              <Affix offsetTop={0} className="app__affix-header">
+                <Navbar />
+              </Affix>
             </Header>
             <Content style={contentStyle}>
               <Component {...pageProps} />
