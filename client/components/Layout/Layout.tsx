@@ -15,7 +15,7 @@ export default function Layout(props: Props) {
   return (
     <div className="w-full p-0">
       <Navbar logo={"Mu"} menuItems={test} />
-      {props.children}
+      <> {props.children}</>
       <Footer />
     </div>
   );

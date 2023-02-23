@@ -12,19 +12,19 @@ type Props = {
 const Navbar = ({ logo, menuItems }: Props) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleMenuClick = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const handleCloseMenu = () => {
-    setMenuOpen(false);
-  };
-
   const menuItemsJSX = menuItems.map((item, index) => {
     return (
-      <Menu.Item key={index} href={item.link} onClick={handleCloseMenu}>
+      <Menu.Item key={index} href={item.link}>
         {item.name}
       </Menu.Item>
+    );
+  });
+  let teat = ["dada", "dada", "dada"];
+  const togle = teat.map((item, index) => {
+    return (
+      <Grid.Row columns={1} only="mobile tablet">
+        <h1>Muziks</h1>
+      </Grid.Row>
     );
   });
 
@@ -34,7 +34,7 @@ const Navbar = ({ logo, menuItems }: Props) => {
         <Grid.Column>
           <Menu borderless fixed="top">
             <Menu.Item header>
-              <img src={logo} alt="logo" className="logo" />
+              <h1>Muziks</h1>
             </Menu.Item>
             <Menu.Menu position="right">
               <Menu.Item>{menuItemsJSX}</Menu.Item>
@@ -45,18 +45,26 @@ const Navbar = ({ logo, menuItems }: Props) => {
           </Menu>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row columns={2} only="mobile tablet" textAlign="center">
+      <Grid.Row columns={1} only="mobile tablet" textAlign="center">
         <Menu borderless fixed="top">
           <Menu.Item header position="right">
-            <img src={logo} alt="logo" className="logo" />
+            <h1>Muziks</h1>
           </Menu.Item>
           <Menu.Item
-            className="hamburger-icon"
             icon="sidebar"
-            onClick={handleMenuClick}
             position="right"
+            onClick={e => {
+              if (menuOpen == true) {
+                setMenuOpen(false);
+              } else if (menuOpen == false) {
+                setMenuOpen(true);
+              }
+            }}
           />
         </Menu>
+      </Grid.Row>
+      <Grid.Row columns={1} only="mobile tablet">
+        {menuOpen == true ? <>{togle}</> : null}
       </Grid.Row>
     </Grid>
   );

@@ -5,5 +5,19 @@ import { Inter } from "@next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  return <>dqd</>;
+  return (
+    <>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div> <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+      <div>fafa</div>
+    </>
+  );
 }
