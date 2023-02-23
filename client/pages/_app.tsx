@@ -4,28 +4,23 @@ import Navbar from "components/Layout/navbar";
 export default function App({ Component, pageProps }: AppProps) {
   const { Header, Footer, Sider, Content } = Layout;
   const headerStyle: React.CSSProperties = {
+    width: "100%",
     textAlign: "center",
     color: "#fff",
     height: 64,
-    paddingInline: 50,
-    lineHeight: "64px",
-    backgroundColor: "#7dbcea",
+    lineHeight: "62px",
+    backgroundColor: "white",
+    top: 0,
+    position: "fixed",
   };
 
   const contentStyle: React.CSSProperties = {
+    marginTop: "64px",
     textAlign: "center",
-    height: "500px",
+    height: "100%",
     minHeight: 1000,
-
     color: "#fff",
     backgroundColor: "#108ee9",
-  };
-
-  const siderStyle: React.CSSProperties = {
-    textAlign: "center",
-    lineHeight: "120px",
-    color: "#fff",
-    backgroundColor: "#3ba0e9",
   };
 
   const footerStyle: React.CSSProperties = {
@@ -37,7 +32,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Space direction="vertical" style={{ width: "100%" }}>
         <Layout>
-          <Header style={headerStyle}>Header</Header>
+          <Header style={headerStyle}>
+            <Navbar />
+          </Header>
           <Content style={contentStyle}>
             <Component {...pageProps} />
           </Content>
