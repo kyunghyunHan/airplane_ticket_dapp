@@ -3,10 +3,10 @@ import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 const Navbar: React.FC = () => (
   <Layout>
     <Row align="middle">
-      <Col span={2}>
+      <Col xl={{ span: 2 }}>
         <a href="">비행기</a>
       </Col>
-      <Col span={4} offset={16}>
+      <Col xl={{ offset: 10 }} xs={{ offset: 1 }} offset={10}>
         <Menu mode="horizontal">
           <Menu.Item key="mail">
             <a href="">비행기</a>
@@ -19,7 +19,10 @@ const Navbar: React.FC = () => (
           </Menu.Item>
         </Menu>
       </Col>
-      <Col span={2} style={{ textAlign: "right" }}>
+      <Col xs={2} xl={0} style={{ textAlign: "right" }}>
+        <a href="">비d</a>
+      </Col>
+      <Col xl={2} lg={0} xs={0} style={{ textAlign: "right" }}>
         <WalletSelector />
       </Col>
     </Row>
