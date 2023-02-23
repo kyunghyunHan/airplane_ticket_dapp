@@ -1,15 +1,8 @@
-import { Layout, Space } from "antd";
-const { Header, Footer, Sider, Content } = Layout;
-const headerStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
+import React, { useState } from "react";
+import { Menu, Container } from "semantic-ui-react";
+import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+function Footer() {
+  return <>footer</>;
+}
 
-  backgroundColor: "#7dbcea",
-};
-const App: React.FC = () => (
-  <>
-    <Header style={headerStyle}>Header</Header>
-  </>
-);
-
-export default App;
+export default Footer;
