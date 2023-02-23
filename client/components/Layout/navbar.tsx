@@ -19,15 +19,6 @@ const Navbar = ({ logo, menuItems }: Props) => {
       </Menu.Item>
     );
   });
-  let teat = ["dada", "dada", "dada"];
-  const togle = teat.map((item, index) => {
-    return (
-      <Grid.Row columns={1} only="mobile tablet">
-        <h1>Muziks</h1>
-      </Grid.Row>
-    );
-  });
-
   return (
     <Grid>
       <Grid.Row columns={1} textAlign={"center"} only={"computer"}>
@@ -62,9 +53,6 @@ const Navbar = ({ logo, menuItems }: Props) => {
             }}
           />
         </Menu>
-      </Grid.Row>
-      <Grid.Row columns={1} only="mobile tablet">
-        {menuOpen == true ? <>{togle}</> : null}
       </Grid.Row>
     </Grid>
   );
