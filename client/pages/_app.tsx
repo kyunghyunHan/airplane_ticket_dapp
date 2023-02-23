@@ -1,6 +1,8 @@
 import type { AppProps } from "next/app";
 import { Layout, Space } from "antd";
+import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";
 import Navbar from "components/Layout/navbar";
+import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
 export default function App({ Component, pageProps }: AppProps) {
   const { Header, Footer, Sider, Content } = Layout;
   const headerStyle: React.CSSProperties = {
@@ -13,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     top: 0,
     position: "fixed",
   };
-
+  const wallets = [new MartianWallet()];
   const contentStyle: React.CSSProperties = {
     marginTop: "64px",
     textAlign: "center",
@@ -30,17 +32,19 @@ export default function App({ Component, pageProps }: AppProps) {
   };
   return (
     <>
-      <Space direction="vertical" style={{ width: "100%" }}>
-        <Layout>
-          <Header style={headerStyle}>
-            <Navbar />
-          </Header>
-          <Content style={contentStyle}>
-            <Component {...pageProps} />
-          </Content>
-          <Footer style={footerStyle}>Footer</Footer>
-        </Layout>
-      </Space>
+      <AptosWalletAdapterProvider plugins={wallets} autoConnect={true}>
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <Layout>
+            <Header style={headerStyle}>
+              <Navbar />
+            </Header>
+            <Content style={contentStyle}>
+              <Component {...pageProps} />
+            </Content>
+            <Footer style={footerStyle}>Footer</Footer>
+          </Layout>
+        </Space>
+      </AptosWalletAdapterProvider>
     </>
   );
 }
