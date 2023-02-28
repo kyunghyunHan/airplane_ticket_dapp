@@ -1,60 +1,116 @@
-import { useState } from "react";
-import { Menu, Grid, GridColumn } from "semantic-ui-react";
+import {
+  createStyles,
+  Menu,
+  Center,
+  Header,
+  Container,
+  Group,
+  Button,
+  Burger,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+const HEADER_HEIGHT = 60;
 
-import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
-import { AptosClient } from "aptos";
-import { useWallet } from "@aptos-labs/wallet-adapter-react";
-type Props = {
-  logo: string;
-  menuItems: { name: string; link: string }[];
-};
+const useStyles = createStyles(theme => ({
+  Header: {
+    position: "fixed",
+  },
+  inner: {
+    height: HEADER_HEIGHT,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 
-const Navbar = ({ logo, menuItems }: Props) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  links: {
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
+    },
+  },
 
-  const menuItemsJSX = menuItems.map((item, index) => {
+  burger: {
+    [theme.fn.largerThan("sm")]: {
+      display: "none",
+    },
+  },
+
+  link: {
+    display: "block",
+    lineHeight: 1,
+    padding: "8px 12px",
+    borderRadius: theme.radius.sm,
+    textDecoration: "none",
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[0]
+        : theme.colors.gray[7],
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
+    },
+  },
+
+  linkLabel: {
+    marginRight: 5,
+  },
+}));
+interface HeaderActionProps {
+  links: {
+    link: string;
+    label: string;
+  }[];
+}
+
+const Navbar = ({ links }: HeaderActionProps) => {
+  const { classes } = useStyles();
+  const [opened, { toggle }] = useDisclosure(false);
+  const items = links.map(link => {
     return (
-      <Menu.Item key={index} href={item.link}>
-        {item.name}
-      </Menu.Item>
+      <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
+        <Menu.Target>
+          <a
+            href={link.link}
+            className={classes.link}
+            onClick={event => event.preventDefault()}
+          >
+            <Center>
+              <span className={classes.linkLabel}>{link.label}</span>
+            </Center>
+          </a>
+        </Menu.Target>
+      </Menu>
     );
   });
   return (
-    <Grid>
-      <Grid.Row columns={1} textAlign={"center"} only={"computer"}>
-        <Grid.Column>
-          <Menu borderless fixed="top">
-            <Menu.Item header>
-              <h1>Muziks</h1>
-            </Menu.Item>
-            <Menu.Menu position="right">
-              <Menu.Item>{menuItemsJSX}</Menu.Item>
-            </Menu.Menu>
-            <Menu.Item>
-              <WalletSelector />
-            </Menu.Item>
-          </Menu>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row columns={1} only="mobile tablet" textAlign="center">
-        <Menu borderless fixed="top">
-          <Menu.Item header position="right">
-            <h1>Muziks</h1>
-          </Menu.Item>
-          <Menu.Item
-            icon="sidebar"
-            position="right"
-            onClick={e => {
-              if (menuOpen == true) {
-                setMenuOpen(false);
-              } else if (menuOpen == false) {
-                setMenuOpen(true);
-              }
-            }}
-          />
-        </Menu>
-      </Grid.Row>
-    </Grid>
+    <Header
+      className={classes.Header}
+      height={HEADER_HEIGHT}
+      sx={{ borderBottom: 0 }}
+      mb={10}
+    >
+      <Container className={classes.inner} fluid>
+        <Group>
+          <h1>LOGO</h1>
+        </Group>
+        <Group spacing={5} className={classes.links}>
+          {items}
+        </Group>
+        <Button radius="xl" sx={{ height: 30 }}>
+          Get early access
+        </Button>
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          className={classes.burger}
+          size="sm"
+        />
+      </Container>
+    </Header>
   );
 };
 
