@@ -10,11 +10,11 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 const HEADER_HEIGHT = 60;
-
 const useStyles = createStyles(theme => ({
   Header: {
     position: "fixed",
   },
+
   inner: {
     height: HEADER_HEIGHT,
     display: "flex",
@@ -23,13 +23,13 @@ const useStyles = createStyles(theme => ({
   },
 
   links: {
-    [theme.fn.smallerThan("sm")]: {
+    [theme.fn.smallerThan("lg")]: {
       display: "none",
     },
   },
 
   burger: {
-    [theme.fn.largerThan("sm")]: {
+    [theme.fn.largerThan("lg")]: {
       display: "none",
     },
   },
@@ -57,6 +57,11 @@ const useStyles = createStyles(theme => ({
 
   linkLabel: {
     marginRight: 5,
+  },
+  acess: {
+    [theme.fn.smallerThan("lg")]: {
+      display: "none",
+    },
   },
 }));
 interface HeaderActionProps {
@@ -94,13 +99,11 @@ const Navbar = ({ links }: HeaderActionProps) => {
       mb={10}
     >
       <Container className={classes.inner} fluid>
-        <Group>
-          <h1>LOGO</h1>
-        </Group>
-        <Group spacing={5} className={classes.links}>
+        <h1>LOGO</h1>
+        <Group spacing={4} className={classes.links}>
           {items}
         </Group>
-        <Button radius="xl" sx={{ height: 30 }}>
+        <Button className={classes.acess} radius="xl" sx={{ height: 30 }}>
           Get early access
         </Button>
         <Burger
