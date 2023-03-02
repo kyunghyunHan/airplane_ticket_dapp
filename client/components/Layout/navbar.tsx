@@ -10,7 +10,7 @@ import {
   Divider,
 } from "@mantine/core";
 import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
-
+import { useRouter } from "next/router";
 import { useDisclosure } from "@mantine/hooks";
 const HEADER_HEIGHT = 60;
 const useStyles = createStyles(theme => ({
@@ -70,6 +70,9 @@ const useStyles = createStyles(theme => ({
   linkLabel: {
     marginRight: 5,
   },
+  logo: {
+    textAlign: "center",
+  },
 }));
 interface HeaderActionProps {
   links: {
@@ -82,13 +85,14 @@ const Navbar = ({ links }: HeaderActionProps) => {
   const [opened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const { classes, theme } = useStyles();
-
+  const router = useRouter();
   const items = links.map(link => {
     return (
       <a
-        href={link.link}
         className={classes.link}
-        onClick={event => event.preventDefault()}
+        onClick={e => {
+          router.push(link.link);
+        }}
       >
         <Center>
           <span className={classes.linkLabel}>{link.label}</span>
@@ -105,8 +109,8 @@ const Navbar = ({ links }: HeaderActionProps) => {
         mb={10}
       >
         <Container className={classes.inner} fluid>
-          <Group>
-            <h1>LOGO</h1>
+          <Group className={classes.logo}>
+            <h1>Airplane</h1>
           </Group>
           <Group>
             <Group spacing={5} className={classes.links}>
@@ -142,7 +146,7 @@ const Navbar = ({ links }: HeaderActionProps) => {
         zIndex={1000000}
         sx={{ textAlign: "center" }}
       >
-        <h1>LOGO</h1>
+        <h1>Airplane</h1>
         <ScrollArea sx={{ height: "calc(100vh - 60px)" }} mx="-md">
           <Divider
             my="sm"

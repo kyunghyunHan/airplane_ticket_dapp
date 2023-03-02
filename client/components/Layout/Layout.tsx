@@ -12,20 +12,12 @@ interface HeaderActionProps {
 }
 let test = [
   {
-    link: "dada",
-    label: "dad",
+    link: "/reservation",
+    label: "Reservation",
   },
   {
-    link: "dada",
-    label: "dad",
-  },
-  {
-    link: "dada",
-    label: "dad",
-  },
-  {
-    link: "dada",
-    label: "dad",
+    link: "/buy_ticket",
+    label: "Buy Ticket",
   },
 ];
 
