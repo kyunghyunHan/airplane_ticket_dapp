@@ -26,20 +26,21 @@ export default function Reservation() {
     genRandomKey();
   }, [account]);
 
-  useEffect(() => {
-    const genRandomKey = async () => {
-      if (!account) return [];
-      const todoListResource = await client.getAccountResource(
-        account?.address,
-        `${moduleAddress}::tickets::AirplaneTicket`
-      );
-      console.log(todoListResource);
-      const taskCounter = (todoListResource as any).data.counter;
-      setNewTask(taskCounter);
-    };
+  const add = async () => {
+    if (!account) return;
 
-    genRandomKey();
-  }, [account]);
+    const payload = {
+      type: "entry_function_payload",
+      function: `${moduleAddress}::tickets::create_flight`,
+      type_arguments: [],
+      arguments: [],
+    };
+    console.log(payload);
+    const response = await signAndSubmitTransaction(payload);
+    console.log(response);
+    await client.waitForTransaction(response.hash);
+    window.location.reload();
+  };
   return (
     <>
       <div>fafa</div>
