@@ -19,8 +19,10 @@ export default function Reservation() {
         `${moduleAddress}::tickets::Flight`
       );
       console.log(todoListResource);
-      const taskCounter = (todoListResource as any).data.counter;
-      setNewTask(taskCounter);
+      const available_tickets = (todoListResource as any).data
+        .available_tickets;
+      setNewTask(available_tickets);
+      console.log(available_tickets);
     };
 
     genRandomKey();
@@ -32,8 +34,23 @@ export default function Reservation() {
     const payload = {
       type: "entry_function_payload",
       function: `${moduleAddress}::tickets::create_flight`,
-      type_arguments: [],
+      type_arguments: ["30"],
       arguments: [],
+    };
+    console.log(payload);
+    const response = await signAndSubmitTransaction(payload);
+    console.log(response);
+    await client.waitForTransaction(response.hash);
+    window.location.reload();
+  };
+  const buy = async () => {
+    if (!account) return;
+
+    const payload = {
+      type: "entry_function_payload",
+      function: `${moduleAddress}::tickets::buy_ticket`,
+      type_arguments: ["0x1::aptos_coin::AptosCoin"],
+      arguments: [moduleAddress, "A2", 2],
     };
     console.log(payload);
     const response = await signAndSubmitTransaction(payload);
@@ -43,7 +60,58 @@ export default function Reservation() {
   };
   return (
     <>
+      <button
+        onClick={e => {
+          add();
+        }}
+      >
+        dadada
+      </button>
       <div>fafa</div>
+      <button
+        onClick={e => {
+          add();
+        }}
+      >
+        dadada
+      </button>
+      <button
+        onClick={e => {
+          add();
+        }}
+      >
+        dadada
+      </button>
+      <button
+        onClick={e => {
+          add();
+        }}
+      >
+        dadada
+      </button>
+      <button
+        onClick={e => {
+          add();
+        }}
+      >
+        dadada
+      </button>
+      <div>fafa</div>
+      <div>fafa</div>
+      <button
+        onClick={e => {
+          add();
+        }}
+      >
+        dadada
+      </button>
+      <button
+        onClick={e => {
+          buy();
+        }}
+      >
+        buy
+      </button>
     </>
   );
 }
